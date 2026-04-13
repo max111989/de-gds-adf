@@ -1,0 +1,23 @@
+{
+	"name": "New_Customer_data_source_adls",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLS_airbnb_cdc_storage_",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "customer-raw-data",
+				"fileSystem": "airbnb"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
