@@ -1,0 +1,77 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "airbnb-near-realtime-data-pipeline"
+		},
+		"ADLS_airbnb_cdc_storage__accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ADLS_airbnb_cdc_storage_'"
+		},
+		"airbnb_cdc_cosmos_db_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'airbnb_cdc_cosmos_db'"
+		},
+		"ADLS_airbnb_cdc_storage__properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://airbnbcdcadls.dfs.core.windows.net/"
+		},
+		"airbnb_cdc_synapse_workspace_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "de-airbnb-cdc-synapse.sql.azuresynapse.net"
+		},
+		"airbnb_cdc_synapse_workspace_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "myairbnbcdcdedicatedsqlpool"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "airbnb-near-realtime-data-pipeline_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ADLS_airbnb_cdc_storage__accountKey": {
+						"value": "[parameters('ADLS_airbnb_cdc_storage__accountKey')]"
+					},
+					"airbnb_cdc_cosmos_db_connectionString": {
+						"value": "[parameters('airbnb_cdc_cosmos_db_connectionString')]"
+					},
+					"ADLS_airbnb_cdc_storage__properties_typeProperties_url": {
+						"value": "[parameters('ADLS_airbnb_cdc_storage__properties_typeProperties_url')]"
+					},
+					"airbnb_cdc_synapse_workspace_properties_typeProperties_server": {
+						"value": "[parameters('airbnb_cdc_synapse_workspace_properties_typeProperties_server')]"
+					},
+					"airbnb_cdc_synapse_workspace_properties_typeProperties_database": {
+						"value": "[parameters('airbnb_cdc_synapse_workspace_properties_typeProperties_database')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
