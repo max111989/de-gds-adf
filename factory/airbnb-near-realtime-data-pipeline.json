@@ -1,0 +1,9 @@
+{
+	"name": "airbnb-near-realtime-data-pipeline",
+	"location": "westus3",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "d59f78b5-03e7-4969-a37d-1a67fdbae75d",
+		"tenantId": "435ecae1-f175-4bf6-a322-d3921814149e"
+	}
+}
